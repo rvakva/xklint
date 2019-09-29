@@ -58,8 +58,7 @@ public class XKChineseStringDetector extends Detector implements Detector.UastSc
 //        return Collections.<Class<? extends UElement>>singletonList(StringLiteral.class);
 //    }
 
-
-    //    @Override
+//    @Override
 //    public boolean appliesTo(@NonNull Context context, @NonNull File file) {
 //        return true;
 //    }

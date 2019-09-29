@@ -4,7 +4,9 @@ import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.ApiKt;
 import com.android.tools.lint.detector.api.Issue;
 import com.rvakva.xklint.rules.detector.LogDetector;
+import com.rvakva.xklint.rules.detector.SerializableDetector;
 import com.rvakva.xklint.rules.detector.ThreadDetector;
+import com.rvakva.xklint.rules.detector.XKCustomToastDetector;
 import com.rvakva.xklint.rules.detector.XKHardcodedValuesDetector;
 import com.rvakva.xklint.rules.detector.XKImageFileSizeDetector;
 import com.rvakva.xklint.rules.detector.XKViewIdNameDetector;
@@ -29,7 +31,9 @@ public class XKIssueRegister extends IssueRegistry {
     public List<Issue> getIssues() {
         return Arrays.asList(
                 LogDetector.ISSUE,
+                SerializableDetector.ISSUE,
                 ThreadDetector.ISSUE,
+                XKCustomToastDetector.ISSUE,
                 XKHardcodedValuesDetector.ISSUE,
                 XKImageFileSizeDetector.ISSUE,
                 XKViewIdNameDetector.ISSUE

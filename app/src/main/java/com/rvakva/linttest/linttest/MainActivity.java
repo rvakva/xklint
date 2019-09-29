@@ -24,5 +24,11 @@ public class MainActivity extends AppCompatActivity {
         tv_name.setText(1 + "\n" +
                 2+ "\n");
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
     }
 }

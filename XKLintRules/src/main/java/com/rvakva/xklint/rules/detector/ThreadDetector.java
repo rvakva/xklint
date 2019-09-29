@@ -9,6 +9,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.intellij.psi.PsiMethod;
 import com.sun.istack.NotNull;
 
 import org.jetbrains.uast.UCallExpression;
@@ -28,49 +29,29 @@ import java.util.List;
  * @Description:
  * @History:
  */
-@SuppressWarnings("UnstableApiUsage")
 public class ThreadDetector extends Detector implements Detector.UastScanner {
 
     private final String NEW_THREAD = "java.lang.Thread";
     public static final Issue ISSUE = Issue.create(
             "XK_ThreadUsage",
-            "Thread Usage",
-            "Please use ThreadPool,such as AsyncTask.SERIAL_EXECUTOR",
+            "避免自己创建Thread",
+            "请勿直接调用new Thread()，建议使用统一的线程管理工具类",
             Category.CORRECTNESS,
             6,
             Severity.WARNING,
             new Implementation(ThreadDetector.class, Scope.JAVA_FILE_SCOPE)
     );
 
-    @Nullable
     @Override
-    public List<Class<? extends UElement>> getApplicableUastTypes() {
-        return Collections.singletonList(UCallExpression.class);
+    public List<String> getApplicableConstructorTypes() {
+        return Collections.singletonList("java.lang.Thread");
     }
 
-    @Nullable
     @Override
-    public UElementHandler createUastHandler(@NotNull JavaContext context) {
-        return new UElementHandler() {
-            @Override
-            public void visitCallExpression(@NotNull UCallExpression node) {
-                if (!UastExpressionUtils.isConstructorCall(node)) {
-                    return;
-                }
-                String className;
-                UReferenceExpression classRef = node.getClassReference();
-                if (classRef != null) {
-                    className = UastUtils.getQualifiedName(classRef);
-                    if (NEW_THREAD.equals(className) && context.getProject().isAndroidProject()) {
-                        context.report(
-                                ISSUE,
-                                node,
-                                context.getLocation(node),
-                                "\u21E2 Avoid call new Thread() directly"
-                        );
-                    }
-                }
-            }
-        };
+    public void visitConstructor(@NotNull JavaContext context,
+                                 @NotNull UCallExpression node,
+                                 @NotNull PsiMethod constructor) {
+        context.report(ISSUE, node, context.getLocation(node),
+                "避免自己创建Thread");
     }
 }
