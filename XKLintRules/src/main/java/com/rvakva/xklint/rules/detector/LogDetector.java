@@ -31,8 +31,8 @@ public class LogDetector extends Detector implements Detector.UastScanner {
 
     public static final Issue ISSUE = Issue.create(
             "XK_LogUsage",
-            "Log Usage",
-            "Please use the unified LogUtil class!",
+            "请不要直接使用Log的方式打印日志，而应该使用公共组件中的LogUtil",
+            "使用公共组件便于统一管理日志的打印和不打印！",
             Category.CORRECTNESS,
             6,
             Severity.ERROR,
@@ -84,7 +84,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
         context.report(ISSUE,
                 node,
                 context.getLocation(node),
-                "\u21E2 Avoid using *Log* class directly"
+                "\u21E2 请使用LogUtil进行日志输出！"
         );
     }
 }

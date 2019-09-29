@@ -23,5 +23,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
 
-    implementation project(':xklintaar')
+//    implementation project(':xklintaar')
+    api 'com.rvakva.android:xklint:1.0.0'
 }

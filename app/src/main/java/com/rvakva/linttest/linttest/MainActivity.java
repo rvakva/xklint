@@ -24,7 +24,5 @@ public class MainActivity extends AppCompatActivity {
         tv_name.setText(1 + "\n" +
                 2+ "\n");
 
-        tv_name.setTextColor(Color.parseColor("#333"));
-
     }
 }
