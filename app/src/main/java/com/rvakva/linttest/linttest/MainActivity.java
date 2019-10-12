@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,5 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Toast.makeText(this,getResources().getString(R.string.app_name),Toast.LENGTH_LONG).show();
+
+        LineBean lineBean = new LineBean();
+
+
     }
 }
