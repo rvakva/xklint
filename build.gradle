@@ -19,9 +19,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://github.com/rvakva/xklint/raw/master"}
         google()
         jcenter()
-        maven { url "https://github.com/rvakva/xklint/raw/master"}
     }
 }
 

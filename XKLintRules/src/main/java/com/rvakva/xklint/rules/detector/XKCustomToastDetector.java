@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.LintFix;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.android.tools.lint.detector.api.SourceCodeScanner;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.source.PsiMethodImpl;
@@ -36,7 +37,7 @@ import java.util.List;
  * @Description:
  * @History:
  */
-public class XKCustomToastDetector extends Detector implements Detector.UastScanner {
+public class XKCustomToastDetector extends Detector implements SourceCodeScanner {
 
 
     private static final Class<? extends Detector> DETECTOR_CLASS = XKCustomToastDetector.class;
@@ -67,7 +68,7 @@ public class XKCustomToastDetector extends Detector implements Detector.UastScan
 
     @Override
     public List<String> getApplicableMethodNames() {
-        return Arrays.asList("makeText", "show");
+        return Collections.singletonList("makeText");
     }
 
     @Override
@@ -94,9 +95,9 @@ public class XKCustomToastDetector extends Detector implements Detector.UastScan
                     .with(replace)
                     .build();
         }
-        if (fix != null) {
-            context.report(ISSUE, node, context.getLocation(node), ISSUE_DESCRIPTION, fix);
-        }
+
+        context.report(ISSUE, node, context.getLocation(node), ISSUE_DESCRIPTION, fix);
+
     }
 
 }
